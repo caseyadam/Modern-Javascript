@@ -4,19 +4,19 @@ const StorageCtrl = (function(){
   return {
     storeItem: function(item){
       let items;
-      // Check if any items in ls
+      // Check if any items in local storage
       if(localStorage.getItem('items') === null){
         items = [];
         // Push new item
         items.push(item);
-        // Set ls
+        // Set local storage
         localStorage.setItem('items', JSON.stringify(items));
       } else {
-        // Get what is already in ls
+        // Get what is already in local storage
         items = JSON.parse(localStorage.getItem('items'));
         // Push new item
         items.push(item);
-        // Re set ls
+        // Reset local storage
         localStorage.setItem('items', JSON.stringify(items));
       }
     },
@@ -30,8 +30,9 @@ const StorageCtrl = (function(){
       return items;
     },
     updateItemStorage: function(updatedItem){
+      // Pulls items out of local storage and parses
       let items = JSON.parse(localStorage.getItem('items'));
-
+      // Loop through items
       items.forEach(function(item, index){
         if(updatedItem.id === item.id){
           items.splice(index, 1, updatedItem);
@@ -106,8 +107,8 @@ const ItemCtrl = (function(){
       });
       return found;
     },
-    updateItem: function(name, calories){
-      // Calories to number
+    updateItem: function(name, calories){    // This updates in the data structure, not UI
+      // Calories to number from string
       calories = parseInt(calories);
       let found = null;
       data.items.forEach(function(item){
@@ -243,7 +244,6 @@ const UICtrl = (function(){
       let listItems = document.querySelectorAll(UISelectors.listItems);
       // Turn Node list into array
       listItems = Array.from(listItems);
-
       listItems.forEach(function(item){
         item.remove();
       });
@@ -283,6 +283,7 @@ const App = (function(ItemCtrl, StorageCtrl, UICtrl){
     document.querySelector(UISelectors.addBtn).addEventListener('click', itemAddSubmit);
     // Disable submit on enter
     document.addEventListener('keypress', function(e){
+      // keyCode 13 is the enter button
       if(e.keyCode === 13 || e.which === 13){
         e.preventDefault();
         return false;
