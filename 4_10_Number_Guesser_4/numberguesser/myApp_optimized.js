@@ -7,14 +7,14 @@ GAME FUNCTION:
 - Let player choose to play again
 */
 
-// Game values
+// GAME VALEUS
 // Note you don't have to put a ; after every variable. Rather you can use a comma until the last one.
 let min = 1,
     max = 10,
     winningNum = 2,
     guessesLeft = 3;
 
-// UI Elements
+// UI ELEMENTS
 const game = document.querySelector('#game'),
       minNum = document.querySelector('.min-num'),
       maxNum = document.querySelector('.max-num'),
@@ -22,12 +22,12 @@ const game = document.querySelector('#game'),
       guessInput = document.querySelector('#guess-input'),
       message = document.querySelector('.message');
 
-// Assign UI min and max
-// This allows you to update the text with javascript in the min and max spans
+// ASSIGN UI MIN AND MAX
+// This allows you to input the text with javascript in the min and max spans
 minNum.textContent = min;
 maxNum.textContent = max;
 
-// Listen for guess button clicked
+// GUESS BUTTON CLICKED
 guessBtn.addEventListener('click', function(){
   // Because the value entered by the user becomes a string, we use parseInt to change it into a number
   // If you console log the number, you will see it is black which means its a string
@@ -51,24 +51,24 @@ guessBtn.addEventListener('click', function(){
     // // You Won! message
     // // Here we call set message too but we pass in different info to the setMessage function
     // setMessage(`${winningNum} is correct, YOU WIN!`, 'green');
-
   } else {
     // User guessed wrong number so subtract one chance
     // This is a short hand way of writing 'guessLeft = guessesLeft -1'
     guessesLeft -= 1;
     // Now we want to check if there are any guesses left
     if(guessesLeft === 0){
-      // Game over: Lost
+      // GAME OVER
       gameOver(false, `Game Over, you lost. The correct number was ${winningNum}`);
       // This code below is optimized by the code above
-      // // Game over: Lost
+      // // GAME OVER
       // // Disable input
       // guessInput.disabled = true;
       // // Change border color
       // guessInput.style.borderColor = 'red';
       // // Set message
       // setMessage(`Game over, you lost. The correct number was ${winningNum}`, 'red');
-    } else{
+    } else {
+      // WRONG, GUESS AGAIN
       // Change border color
       guessInput.style.borderColor = 'red';
       // Set text color
@@ -81,7 +81,7 @@ guessBtn.addEventListener('click', function(){
   }
 }
 
-// Error message
+// ERROR MESSSAGE
 // Note we can't set the color style for both correct and incorrect answers here (For ex. message.style.color = 'red';)
 // To solve this we pass in a variable called "color" that is defined above where it says 'red'
 function setMessage(msg, color){
@@ -89,7 +89,7 @@ function setMessage(msg, color){
   message.textContent = msg;
 }
 
-// Game over
+// GAME OVER
 // This is created to optimize some of the repetitive code
 function gameOver(won, msg){
   // Here we define the color depending on a win or loss

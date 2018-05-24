@@ -1,4 +1,4 @@
-// Listen for submit button
+// DISPLAY LOADING GIF ON CALCULATE SUBMIT AND START CALCULATIONS
 // Note we do not listen on the button/submit, but rather the form parent
 // Also note in order to set the delay on running the function, we don't just add 'calculateResults' into the event listener. We make it a function instead.
 // Also also note, when we do this we can move the 'e' from calculate results and preventDefault as we are no longer running an event handler in that function. We add them below now.
@@ -10,10 +10,10 @@ document.getElementById('loan-form').addEventListener('submit', function(e){
   document.getElementById('loading').style.display = 'block';
   //We show the spinner for 2 seconds before running the calculateResults function
   setTimeout(calculateResults, 2000);
-
   e.preventDefault();
 });
 
+// CALCULATE THE RESULTS
 function calculateResults(){
   // We get the UI variables
   const amount = document.getElementById('amount');
@@ -29,7 +29,6 @@ function calculateResults(){
   // Here we compute the monthly payments
   const x = Math.pow(1 + calculatedInterest, calculatedPayments);
   const monthly = (principal*x*calculatedInterest)/(x-1);
-
   // Now we want to check if the monthly value is a finite number
   // If it is, we want to display the results in the fields
   if(isFinite(monthly)) {
@@ -48,8 +47,8 @@ function calculateResults(){
   e.preventDefault();
 }
 
-// Show error
-// Here we are creating a custom UI
+// SHOW ERROR
+// Here we create a custom UI message
 function showError(error){
   // Hide results
   document.getElementById('results').style.display = 'none';
@@ -71,11 +70,7 @@ function showError(error){
   setTimeout(clearError, 3000);
 }
 
-// Clear error
+// CLEAR ERROR
 function clearError(){
   document.querySelector('.alert').remove();
 }
-
-//Make spinner graphic appear temporarily before totals appear
-
-//Make the totals appear after calculation
